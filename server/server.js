@@ -11,14 +11,6 @@ app.use(express.static('server/public'));
 app.use('/toDo', toDoRouter);
 
 
-app.get(('/toDo', toDoRouter));
-
-app.delete('/toDo', toDoRouter);
-
-app.put('/toDo', toDoRouter);
-
-
-
 
 
 
