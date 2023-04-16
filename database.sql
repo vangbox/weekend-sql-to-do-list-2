@@ -1,37 +1,16 @@
 -- CREATE THE TABLE:
-CREATE TABLE TODO (
+CREATE TABLE toDo (
 	"id" SERIAL PRIMARY KEY,
-	"todo" VARCHAR(100),
-	"completed" BOOL,
+	"toDo" VARCHAR(100),
+	"completed" BOOL
 );
 
 -- Insert multiple rows into the todo table:
-INSERT INTO TODO (
-	"todo",
-	"completed"
-) VALUES (
-	"clean dishes",
-	FALSE
-),
-(
-	'wash car',
-	FALSE
-),
-(
-	'make coffee',
-	FALSE
-),
-(
-	'do laundry',
-	FALSE
-),
-(
-	'go to work',
-	FALSE
-);
+INSERT INTO toDo
+	("toDo", "completed")
+	VALUES
+	('do laundry', false),
+	('go to work', true);
 
 -- In postico, this command will show what is in your table currently:
-SELECT
-	*
-FROM
-	TODO;
+	SELECT * FROM toDo;

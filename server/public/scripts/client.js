@@ -3,7 +3,7 @@ console.log('client.js');
 $(document).ready(function () {
   console.log('Test Clicker');
   // Establish Click Listeners
-  // setupClickListeners()
+  setupClickListeners()
   // load existing todo on page load
   getTodo();
 
@@ -12,34 +12,37 @@ $(document).ready(function () {
   // $('#listtodo').on('click', '.completedBtn', completedBtn)
 }); // end doc ready
 
-// function setupClickListeners() {
-//   $('#addButton').on('click', function () {
-//     console.log('in addButton on click');
-//     // get user input and put in an object
-//     // using a test object
-//     let todoSend = {
-//       todo: $('#todoIn').val(),
-//     };
-//     // call todo with the new obejct
-//     savetodo(todoSend);
-//   });
-// }
+function setupClickListeners() {
+  $('#addButton').on('click', function () {
+    console.log('in addButton on click');
+    // get user input and put in an object
+    // using a test object
+    let todoSend = {
+      todo: $('#todoIn').val(),
+    };
+    // call todo with the new obejct
+    saveTodo(todoSend);
+  });
+}
 
 function getTodo() {
-  console.log('in getTodo');
+  // console.log('in getTodo'); -- it works
   // ajax call to server to get todo list
   $.ajax({
     method: 'GET',
     url: '/todo'
   }).then(function (response) {
-    console.log('getTodo GET works!', response);
+    // console.log('getTodo GET works!', response); --it works
     //empty out the todo table
     $('#listTodo').empty();
 
     // for(let todo of response){
     //   console.log('loops work!', todo);
     // } - loops work!!
-
+    function completedCSS(){
+      $('#completedBtn').body.style.backgroundColor = "pink";
+    }
+    
     //loop through the todo list from response
     //  and render onto the DOM
     for(let todo of response) {
@@ -61,7 +64,7 @@ function getTodo() {
         <tr data-id=${todo.id}>
           <td>${todo.toDo}</td>
           <td>
-            
+            ${completedCSS()}
           </td>
           <td>
             <button class="deleteKoalaBtn">Delete</button>
@@ -74,22 +77,22 @@ function getTodo() {
   })
 }; // end getTodo
 
-// function savetodo(newtodo) {
-//   console.log('in todo', newtodo);
-//   // ajax call to server to get todo 
-//   $.ajax({
-//     method: 'POST',
-//     url: "/todo",
-//     data: newtodo
-//   }).then(function (response) {
-//       console.log(response);
-//       getTodo();
-//       $('#todoIn').val('');
+function saveTodo(newTodo) {
+  console.log('in todo', newTodo);
+  // ajax call to server to get todo 
+  $.ajax({
+    method: 'POST',
+    url: "/todo",
+    data: newTodo
+  }).then(function (response) {
+      console.log(response);
+      getTodo();
+      $('#todoIn').val('');
       
-//     }).catch(function (error) {
-//     console.log('The "/todo" ajax post request failed with error: ', error);
-//   })
-// }
+    }).catch(function (error) {
+    console.log('The "/todo" ajax post request failed with error: ', error);
+  })
+}
 
 // function deletetodo() {
 //   //Grab the data-id from the row this button is in

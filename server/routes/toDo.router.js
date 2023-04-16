@@ -25,23 +25,23 @@ todoRouter.get('/', (req, res) => {
 })
 
 
-// // POST
-// todoRouter.post('/', (req, res) => {
-//     console.log('POST /todo');
-//     let newtodo = req.body;
-//     let sqlText = `INSERT INTO "todo" ("todo", "completed")
-//                 VALUES($1, $2);`;
-//     let sqlValues = [newtodo.todo, newtodo.completed];
+// POST
+todoRouter.post('/', (req, res) => {
+    console.log('POST /todo');
+    let newtodo = req.body;
+    let sqlText = `INSERT INTO "toDo" ("todo", "completed")
+                VALUES($1, $2);`;
+    let sqlValues = [newtodo.toDo, newtodo.completed];
 
-//     pool.query(sqlText, sqlValues)
-//         .then((dbRes) => {
-//             res.sendStatus(201);
-//         })
-//         .catch(error => {
-//             console.log(`Error adding new todo`, error);
-//             res.sendStatus(500);
-//         })
-// })
+    pool.query(sqlText, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log(`Error adding new todo`, error);
+            res.sendStatus(500);
+        })
+})
 
 
 // // PUT: added this to file
