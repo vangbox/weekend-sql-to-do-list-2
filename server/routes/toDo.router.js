@@ -1,24 +1,24 @@
 const express = require('express');
-const toDoRouter = express.Router();
+const todoRouter = express.Router();
 
 // DB CONNECTION
 const pool = require('../modules/pool.js');
 
 
 // GET
-toDoRouter.get('/', (req, res) => {
-    console.log('GET /toDo');
+todoRouter.get('/', (req, res) => {
+    console.log('todoRouter GET /todo works');
 
-    let sqlText = `SELECT * FROM toDo;`;
+    let sqlText = `SELECT * FROM "todo";`;
 
     pool.query(sqlText)
         .then((dbRes) => {
-            let theToDo = dbRes.rows;
-            res.send(theToDo);
+            let theTodo = dbRes.rows;
+            res.send(theTodo);
         })
         .catch((dbErr) => {
             // Log that there was an issue with this function
-            console.log('SQL query in GET /toDo failed:', dbErr);
+            console.log('SQL query in GET /todo failed:', dbErr);
             // Send "Internal Server Error" status to client
             res.sendStatus(500)
         })
@@ -26,31 +26,31 @@ toDoRouter.get('/', (req, res) => {
 
 
 // // POST
-// toDoRouter.post('/', (req, res) => {
+// todoRouter.post('/', (req, res) => {
 //     console.log('POST /todo');
-//     let newToDo = req.body;
-//     let sqlText = `INSERT INTO "toDo" ("toDo", "completed")
+//     let newtodo = req.body;
+//     let sqlText = `INSERT INTO "todo" ("todo", "completed")
 //                 VALUES($1, $2);`;
-//     let sqlValues = [newToDo.toDo, newToDo.completed];
+//     let sqlValues = [newtodo.todo, newtodo.completed];
 
 //     pool.query(sqlText, sqlValues)
 //         .then((dbRes) => {
 //             res.sendStatus(201);
 //         })
 //         .catch(error => {
-//             console.log(`Error adding new toDo`, error);
+//             console.log(`Error adding new todo`, error);
 //             res.sendStatus(500);
 //         })
 // })
 
 
 // // PUT: added this to file
-// toDoRouter.put('/:id', (req, res) => {
+// todoRouter.put('/:id', (req, res) => {
 //     // req.params should look like: { id: '3' }
 //     let theIdToUpdate = req.params.id;
 //     let completed = req.body.completed;
 //     let sqlText = `
-//         UPDATE "toDo"
+//         UPDATE "todo"
 //             SET "completed"=$1
 //             WHERE "id"=$2;
 //     `
@@ -61,13 +61,13 @@ toDoRouter.get('/', (req, res) => {
 //             res.sendStatus(200);
 //         })
 //         .catch((dbErr) => {
-//             console.log('PUT /toDoRouter fail:', dbErr);
+//             console.log('PUT /todoRouter fail:', dbErr);
 //             res.sendStatus(500);
 //         })
 // })
 
 // // DELETE
-// toDoRouter.delete('/:id', (req, res) => {
+// todoRouter.delete('/:id', (req, res) => {
 //     console.log(req.params);
 
 //     let theIdToDelete = req.params.id;
@@ -98,4 +98,4 @@ toDoRouter.get('/', (req, res) => {
 //         })
 // })
 
-module.exports = toDoRouter;
+module.exports = todoRouter;
