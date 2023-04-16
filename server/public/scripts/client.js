@@ -39,6 +39,7 @@ function getTodo() {
     //  and render onto the DOM
     for(let toDo of response) {
       if (toDo.completed === false) {
+        console.log('Looping the toDo', toDo);
         $('#listToDo').append(`
           <tr data-id=${toDo.id}>
             <td>${toDo.toDo}</td>
@@ -56,7 +57,7 @@ function getTodo() {
         <tr data-id=${toDo.id}>
           <td>${toDo.toDo}</td>
           <td>
-            change color when completed for completed box
+            
           </td>
           <td>
             <button class="deleteKoalaBtn">Delete</button>

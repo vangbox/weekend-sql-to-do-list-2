@@ -6,7 +6,7 @@ CREATE TABLE toDo (
 );
 
 -- Insert multiple rows into the toDo table:
-IINSERT INTO toDo
+INSERT INTO toDo
 	("toDo", "completed")
 	VALUES
 	('clean dishes', false),
