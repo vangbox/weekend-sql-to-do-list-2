@@ -136,11 +136,3 @@ function completedBtn() {
     console.log(`Error To Do List on ${idToUpdate}, error --> ${error}`);
   })
 }
-
-//Function to call on CSS 
-
-
-function completedCSS(){
-  let background = $('#completedBtn').backgroundColor('red')
-  return background;
-}

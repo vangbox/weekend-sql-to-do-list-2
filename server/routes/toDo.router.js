@@ -27,7 +27,7 @@ todoRouter.get('/', (req, res) => {
 
 // POST
 todoRouter.post('/', (req, res) => {
-    console.log('POST /todo it works!!');
+    // console.log('POST /todo it works!!'); -it works!
     let newTodo = req.body;
     let sqlText = `INSERT INTO "todo" ("toDo", "completed")
                 VALUES($1, $2);`;
@@ -50,7 +50,7 @@ todoRouter.put('/:id', (req, res) => {
     // req.params should look like: { id: '3' }
     let theIdToUpdate = req.params.id;
     let completed = req.body.completed;
-    console.log('completed testing!!!', completed);
+    // console.log('completed testing!!!', completed); -it works!!
     let sqlText = `
         UPDATE "todo"
             SET "completed"=$1
@@ -71,10 +71,9 @@ todoRouter.put('/:id', (req, res) => {
 // DELETE
 todoRouter.delete('/:id', (req, res) => {
 
-    console.log(req.params);
+    // console.log(req.params); -it works!!
 
     let theIdToDelete = req.params.id;
-
     // Will need to update the name of table for the
     //  delete from SQL query
     // Set up to sanitize the input when paired with
@@ -83,10 +82,9 @@ todoRouter.delete('/:id', (req, res) => {
         DELETE from "todo"
             where "id"=$1;
     `;
-
     // Set up to pair with sqlText to sanitize input.
     let sqlValues = [theIdToDelete];
-
+    
     pool.query(sqlText, sqlValues)
         .then((dbRes) => {
             // Send "Okay" to the client that declares this
