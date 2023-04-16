@@ -17,12 +17,20 @@ function setupClickListeners() {
     console.log('in addButton on click');
     // get user input and put in an object
     // using a test object
+
     let todoSend = {
       todo: $('#todoIn').val(),
     };
+    
+
     // call todo with the new obejct
     saveTodo(todoSend);
   });
+}
+
+function completedCSS(background){
+  $('#completedBtn').backgroundColor = "red";
+  return background;
 }
 
 function getTodo() {
@@ -39,9 +47,6 @@ function getTodo() {
     // for(let todo of response){
     //   console.log('loops work!', todo);
     // } - loops work!!
-    function completedCSS(){
-      $('#completedBtn').body.style.backgroundColor = "pink";
-    }
     
     //loop through the todo list from response
     //  and render onto the DOM
@@ -83,9 +88,12 @@ function saveTodo(newTodo) {
   $.ajax({
     method: 'POST',
     url: "/todo",
-    data: newTodo
+    data: {
+      toDo: newTodo.todo,
+      completed: false,
+    }
   }).then(function (response) {
-      console.log(response);
+      console.log('Post function working!!', response);
       getTodo();
       $('#todoIn').val('');
       

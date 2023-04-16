@@ -7,7 +7,7 @@ const pool = require('../modules/pool.js');
 
 // GET
 todoRouter.get('/', (req, res) => {
-    console.log('todoRouter GET /todo works');
+    // console.log('todoRouter GET /todo works'); -it works!
 
     let sqlText = `SELECT * FROM "todo";`;
 
@@ -27,13 +27,14 @@ todoRouter.get('/', (req, res) => {
 
 // POST
 todoRouter.post('/', (req, res) => {
-    console.log('POST /todo');
-    let newtodo = req.body;
-    let sqlText = `INSERT INTO "toDo" ("todo", "completed")
+    console.log('POST /todo it works!!');
+    let newTodo = req.body;
+    let sqlText = `INSERT INTO "todo" ("toDo", "completed")
                 VALUES($1, $2);`;
-    let sqlValues = [newtodo.toDo, newtodo.completed];
+    let sqlValues = [newTodo.toDo, newTodo.completed];
 
     pool.query(sqlText, sqlValues)
+
         .then((dbRes) => {
             res.sendStatus(201);
         })
