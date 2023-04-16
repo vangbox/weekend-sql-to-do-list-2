@@ -12,5 +12,9 @@ INSERT INTO toDo
 	('do laundry', false),
 	('go to work', true);
 
+SELECT * FROM todo
+ORDER BY toDo.id;
+
+
 -- In postico, this command will show what is in your table currently:
 	SELECT * FROM toDo;

@@ -9,7 +9,8 @@ const pool = require('../modules/pool.js');
 todoRouter.get('/', (req, res) => {
     // console.log('todoRouter GET /todo works'); -it works!
 
-    let sqlText = `SELECT * FROM "todo";`;
+    let sqlText = `SELECT * FROM todo
+                    ORDER BY toDo.id;`;
 
     pool.query(sqlText)
         .then((dbRes) => {
@@ -84,7 +85,7 @@ todoRouter.delete('/:id', (req, res) => {
     `;
     // Set up to pair with sqlText to sanitize input.
     let sqlValues = [theIdToDelete];
-    
+
     pool.query(sqlText, sqlValues)
         .then((dbRes) => {
             // Send "Okay" to the client that declares this
